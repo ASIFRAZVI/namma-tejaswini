@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Namma Tejaswini Solution LLP — Bangalore IT solutions. Call, email, or send us a message." />
+  <title>Contact Us — NTSL | Namma Tejaswini Solution LLP</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 32px; right: 32px; z-index: 9999;
+      background: #fff; border: 1px solid rgba(10,15,46,.1);
+      border-left: 4px solid #2563EB;
+      border-radius: 12px; padding: 16px 24px;
+      box-shadow: 0 12px 40px rgba(10,15,46,.14);
+      font-size: 14px; font-weight: 500; color: #0A0F2E;
+      transform: translateY(80px); opacity: 0;
+      transition: all .35s cubic-bezier(.34,1.56,.64,1);
+      pointer-events: none;
+    }
+    .toast--show { transform: translateY(0); opacity: 1; }
+
+
+
+    /* Map placeholder */
+    .map-block {
+      border-radius: var(--radius-xl); overflow: hidden;
+      border: 1px solid var(--border); margin-top: 56px;
+      position: relative; background: var(--off-white);
+      height: 320px; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px;
+    }
+    .map-block__icon { font-size: 48px; }
+    .map-block__address { font-size: 15px; font-weight: 600; color: var(--navy); text-align: center; line-height: 1.6; }
+    .map-block__sub { font-size: 13px; color: var(--grey-600); }
+    .map-block__btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px; border-radius: var(--radius-full);
+      background: var(--blue); color: #fff; font-size: 13px; font-weight: 600;
+      margin-top: 8px; transition: background .2s, transform .2s;
+    }
+    .map-block__btn:hover { background: #1E40AF; transform: translateY(-2px); }
+
+
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid var(--border); padding: 20px 0;
+      cursor: pointer;
+    }
+    .faq-item__q {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 15px; font-weight: 600; color: var(--navy); gap: 16px;
+    }
+    .faq-item__toggle {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--off-white); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0; transition: all .25s;
+      color: var(--blue);
+    }
+    .faq-item.open .faq-item__toggle { transform: rotate(45deg); background: var(--blue); color: #fff; }
+    .faq-item__a {
+      font-size: 14px; color: var(--grey-600); line-height: 1.75;
+      max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s;
+    }
+    .faq-item.open .faq-item__a { max-height: 200px; padding-top: 14px; }
+
+
+
+    .contact-hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start;
+    }
+    @media(max-width:768px) {
+      .contact-hero-grid { grid-template-columns: 1fr; }
+    }
+
+
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 12px 40px rgba(10,15,46,.08);
+      padding: 28px;
+    }
+    .contact-card__title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 18px;
+    }
+    .contact-card__text {
+      font-size: 14px;
+      color: var(--grey-600);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+    .contact-card__mobile-box {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+    }
+    .contact-card__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: var(--grey-600);
+      margin-bottom: 4px;
+    }
+    .contact-card__mobile {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .contact-card__mobile:hover { color: var(--blue); }
+    .contact-card__mail-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 14px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+      margin-bottom: 14px;
+    }
+    .contact-card__mail-btn:hover {
+      background: #1E40AF;
+      transform: translateY(-2px);
+    }
+    .contact-card__mail-note {
+      font-size: 13px;
+      color: var(--grey-600);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ======== NEW: Center right card, enlarge and style ======== */
+    /* make the grid area a flex container so we can center the right card vertically and horizontally */
+    .contact-hero-grid {
+      display: flex;
+      gap: 60px;
+      align-items: center; /* vertical centering of children */
+      justify-content: center; /* center both columns horizontally within the container */
+      flex-wrap: nowrap;
+    }
+
+    /* left panel (info) keep its look but make it take available space */
+    .contact-hero-grid > .reveal:first-child {
+      flex: 1 1 420px;
+      min-width: 300px;
+    }
+
+    /* right panel (form card) become centered box */
+    .contact-form {
+      flex: 0 0 520px; /* fixed ideal width so it appears larger */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* enlarge the card visually */
+    .contact-form .contact-card {
+      width: 100%;
+      max-width: 520px;
+      padding: 36px;
+      text-align: center;
+      transform-origin: center;
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .contact-form .contact-card__title { font-size: 26px; }
+    .contact-form .contact-card__text { font-size: 16px; margin-bottom: 20px; color: #344054; }
+    .contact-form .contact-card__mobile { font-size: 16px; display: inline-block; }
+    .contact-form .contact-card__label { font-size: 13px; }
+    .contact-form .contact-card__mail-note { font-size: 14px; }
+
+    /* hover pop for emphasis */
+    .contact-form .contact-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(10,15,46,.12); }
+
+    /* make the email button larger */
+    .contact-form .contact-card__mail-btn { padding: 16px 22px; font-size: 16px; }
+
+    @media (max-width: 1100px) {
+      .contact-hero-grid { gap: 28px; }
+      .contact-form { flex: 0 0 460px; }
+    }
+    @media (max-width: 768px) {
+      .contact-hero-grid { display: grid; grid-template-columns: 1fr; }
+      .contact-form { flex: unset; width: 100%; }
+      .contact-form .contact-card { max-width: 100%; padding: 28px; }
+    }
+
+    /* ======== NEW: Animated decorative element in empty space ======== */
+    .left-decor-wrap {
+      position: relative;
+      min-height: 220px;
+    }
+    .animated-blob {
+      position: absolute;
+      left: -40px;
+      top: 10%;
+      width: 220px;
+      height: 220px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(16,185,129,0.09));
+      border-radius: 42% 58% 60% 40% / 50% 40% 60% 50%;
+      filter: blur(14px);
+      z-index: 0;
+      animation: floatBlob 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes floatBlob {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: .95; }
+      50% { transform: translateY(-18px) rotate(8deg) scale(1.03); opacity: .85; }
+      100% { transform: translateY(0) rotate(0deg) scale(1); opacity: .95; }
+    }
+
+    /* ensure content sits above decorative element */
+    .contact-hero-grid > .reveal { position: relative; z-index: 1; }
+
+  </style>
+</head>
+<body>
+
+
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="NTSL Home">
+      <div class="nav__logo-badge" aria-hidden="true">NTSL</div>
+      <div>
+        <div class="nav__logo-text">Namma Tejaswini</div>
+        <div class="nav__logo-sub">Solution LLP</div>
+      </div>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html"            class="nav__link">Home</a></li>
+      <li><a href="about.html"            class="nav__link">About</a></li>
+      <li><a href="index.html#products"   class="nav__link">Products</a></li>
+      <li><a href="index.html#services"   class="nav__link">Services</a></li>
+      <li><a href="index.html#clients"    class="nav__link">Clients</a></li>
+      <li><a href="contact.html"          class="nav__link active">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav__cta">Get in Touch →</a>
+    <button class="nav__burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+
+
+<div class="nav__mobile" id="navMobile" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html"           class="nav__link">Home</a>
+  <a href="about.html"           class="nav__link">About Us</a>
+  <a href="index.html#products" class="nav__link">Products</a>
+  <a href="index.html#services" class="nav__link">Services</a>
+  <a href="index.html#clients"  class="nav__link">Clients</a>
+  <a href="contact.html"        class="nav__link">Contact</a>
+  <a href="contact.html" class="btn btn-primary" style="margin-top:16px">Get in Touch →</a>
+</div>
+
+
+
+<main>
+
+
+
+<!-- ═══════════════════════════ PAGE HERO ════════════════════════ -->
+<section class="page-hero" aria-labelledby="contact-page-heading">
+  <div class="container">
+    <span class="section-label">CONTACT US</span>
+    <h1 class="section-h2 section-h2--white" id="contact-page-heading">
+      Let's start a<br/>conversation
+    </h1>
+    <p class="section-sub section-sub--white" style="margin-top:16px">
+      Have a project in mind? Need a quote on GeM? Want to know more about our products?
+      Reach out — our team responds within 24 hours.
+    </p>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════ CONTACT MAIN ═════════════════════ -->
+<section class="section" aria-labelledby="contact-form-heading">
+  <div class="container">
+    <div class="contact-hero-grid">
+
+      <!-- Left: Info -->
+      <div class="reveal left-decor-wrap">
+        <div class="animated-blob" aria-hidden="true"></div>
+
+        <span class="section-label">REACH US</span>
+        <h2 class="section-h2" id="contact-form-heading" style="font-size:36px">
+          We'd love to<br/>hear from you
+        </h2>
+        <p class="section-sub" style="max-width:100%;margin-top:16px">
+          Whether you're a government department looking to procure through GeM, or a private enterprise
+          seeking IT infrastructure support — we're here.
+        </p>
+
+        <div style="margin-top:36px">
+          <div class="contact-info__item">
+            <div class="contact-info__icon" aria-hidden="true">📍</div>
+            <div>
+              <p class="contact-info__label">OFFICE ADDRESS</p>
+              <p class="contact-info__value">
+                No. 608, 4th H Block, Vrushabhavathi Nagar,<br/>
+                Banashankari 6th Stage,<br/>
+                Bangaluru, Karnataka — 560062
+              </p>
+            </div>
+          </div>
+          <div class="contact-info__item">
+            <div class="contact-info__icon" aria-hidden="true">📞</div>
+            <div>
+              <p class="contact-info__label">PHONE</p>
+              <p class="contact-info__value">
+                <a href="tel:+917975818823">+91 79758 18823</a><br/>
+                <a href="tel:+919448840505">+91 94488 40505</a>
+              </p>
+            </div>
+          </div>
+          <div class="contact-info__item">
+            <div class="contact-info__icon" aria-hidden="true">✉️</div>
+            <div>
+              <p class="contact-info__label">EMAIL</p>
+              <p class="contact-info__value">
+                <a href="mailto:info@tejaswinisolutions.in">info@tejaswinisolutions.in</a><br/>
+                <a href="mailto:yashoda@tejaswinisolutions.in">yashoda@tejaswinisolutions.in</a><br/>
+                <a href="mailto:chandan@tejaswinisolutions.in">chandan@tejaswinisolutions.in</a>
+              </p>
+            </div>
+          </div>
+          <div class="contact-info__item" style="border-bottom:none">
+            <div class="contact-info__icon" aria-hidden="true">🌐</div>
+            <div>
+              <p class="contact-info__label">WEBSITE</p>
+              <p class="contact-info__value">
+                <a href="http://www.tejaswinisolutions.in/" target="_blank" rel="noopener">
+                  [www.tejaswinisolutions.in](https://www.tejaswinisolutions.in)
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Response time badges -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
+          <div style="padding:8px 14px;border-radius:var(--radius-full);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);font-size:12px;font-weight:600;color:#065F46">⚡ Replies within 24hrs</div>
+          <div style="padding:8px 14px;border-radius:var(--radius-full);background:var(--blue-pale);border:1px solid var(--border-blue);font-size:12px;font-weight:600;color:var(--blue)">🏛️ GeM Quotes Available</div>
+        </div>
+      </div>
+
+      <!-- Right: Attractive mail card -->
+      <div class="contact-form reveal reveal-delay-1" aria-hidden="false">
+        <div class="contact-card">
+          <h3 class="contact-card__title">Send us a message</h3>
+          <p class="contact-card__text">
+            Tap the button below to open your email app with a ready message, or call us directly using the numbers below.
+          </p>
+
+          <div class="contact-card__mobile-box" style="justify-items:center; text-align:center;">
+            <div>
+              <div class="contact-card__label">MOBILE NO</div>
+              <a class="contact-card__mobile" href="tel:+917975818823">+91 79758 18823</a>
+            </div>
+            <div>
+              <a class="contact-card__mobile" href="tel:+919448840505">+91 94488 40505</a>
+            </div>
+          </div>
+
+          <a
+            class="contact-card__mail-btn"
+            href="mailto:info@tejaswinisolutions.in?subject=Enquiry%20from%20Website&body=Hello%20NTSL%2C%0A%0AI%20would%20like%20to%20enquire%20about%3A%20%0A%0AOrganisation%2FDepartment%3A%20%0AContact%20Number%3A%20%0A%0ARegards%2C%0A"
+          >
+            ✉️ Connect Us
+          </a>
+
+          <p class="contact-card__mail-note">
+            Subject and message template are prefilled for quick enquiry.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map / Address block -->
+    <div class="map-block reveal">
+      <div class="map-block__icon" aria-hidden="true">📍</div>
+      <p class="map-block__address">
+        No. 608, 4th H Block, Vrushabhavathi Nagar<br/>
+        Banashankari 6th Stage, Bangaluru — 560062
+      </p>
+      <p class="map-block__sub">Karnataka, India</p>
+      <a href="https://www.google.com/maps/search/Banashankari+6th+Stage+Bangalore" target="_blank" rel="noopener" class="map-block__btn">
+        🗺️ Open in Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════ FAQ ════════════════════════════ -->
+<section class="section section--alt" aria-labelledby="faq-heading">
+  <div class="container" style="max-width:760px">
+    <div class="section-head-center reveal">
+      <span class="section-label">FREQUENTLY ASKED</span>
+      <h2 class="section-h2" id="faq-heading">Common questions</h2>
+      <p class="section-sub">Everything you need to know before reaching out.</p>
+    </div>
+
+    <div style="margin-top:56px" role="list">
+      <div class="faq-item reveal" role="listitem">
+        <div class="faq-item__q" tabindex="0" role="button" aria-expanded="false">
+          <span>Are your products available on GeM?</span>
+          <span class="faq-item__toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          Yes — all our products across HP, HPE, Dell, Lenovo, Acer, Epson, Kyocera, Canon, Samsung, LG,
+          Panasonic, APC, Brother, Xerox, and more are listed on the Government e-Marketplace (GeM) portal.
+          Government departments can directly raise purchase orders through GeM.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-1" role="listitem">
+        <div class="faq-item__q" tabindex="0" role="button" aria-expanded="false">
+          <span>Do you provide AMC (Annual Maintenance Contracts)?</span>
+          <span class="faq-item__toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          Yes, we offer comprehensive AMC services for all IT equipment — servers, storage, networking gear,
+          UPS, printers, laptops, desktops, and more. Our AMC plans include preventive maintenance, priority
+          support, and on-site response for Bangalore and surrounding Karnataka districts.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-2" role="listitem">
+        <div class="faq-item__q" tabindex="0" role="button" aria-expanded="false">
+          <span>What is your delivery timeline for procurement orders?</span>
+          <span class="faq-item__toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          We maintain optimized supply chain partnerships with all major OEMs to ensure minimum turn-around
+          time. Standard orders are typically fulfilled within 7–15 business days depending on the product.
+          For urgent government requirements, expedited timelines can be arranged.
+        </div>
+      </div>
+
+      <div class="faq-item reveal" role="listitem">
+        <div class="faq-item__q" tabindex="0" role="button" aria-expanded="false">
+          <span>Do you handle datacenter setup and IT infrastructure projects?</span>
+          <span class="faq-item__toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          Absolutely. We provide end-to-end datacenter solutions including server racks, precision cooling,
+          UPS and battery systems, electrical panels, raised flooring, biometric access, surveillance cameras,
+          and structured cabling. Our team handles complete turnkey datacenter build-outs.
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-1" role="listitem">
+        <div class="faq-item__q" tabindex="0" role="button" aria-expanded="false">
+          <span>Do you serve clients outside Bangalore?</span>
+          <span class="faq-item__toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="faq-item__a">
+          Yes. While our office is in Bangalore, we serve clients across Karnataka — including Davangere,
+          Madikeri, Hosapete, Chithradurga, Ramanagara, Chikkamagaluru, and more. Remote infra management
+          and cloud services extend our reach nationwide.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════ CTA ════════════════════════════ -->
+<section class="cta-section" aria-labelledby="contact-cta-heading">
+  <div class="container">
+    <span class="section-label section-label--gold reveal">QUICK CONNECT</span>
+    <h2 class="section-h2 section-h2--white reveal" id="contact-cta-heading">
+      Prefer a phone call?<br/>We're a ring away.
+    </h2>
+    <p class="section-sub section-sub--white reveal reveal-delay-1">
+      Our team is available Monday–Saturday, 9 AM to 6 PM IST.
+    </p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="tel:+917975818823" class="btn btn-white">📞 +91 79758 18823</a>
+      <a href="tel:+919448840505" class="btn btn-outline-white">📞 +91 94488 40505</a>
+    </div>
+    <!-- <div style="margin-top:24px" class="reveal reveal-delay-3">
+      <a href="mailto:info@tejaswinisolutions.in" class="btn btn-outline-white" style="font-size:13px">
+        ✉️ [info@tejaswinisolutions.in](mailto:info@tejaswinisolutions.in)
+      </a>
+    </div> -->
+  </div>
+</section>
+
+
+
+</main>
+
+
+
+<!-- ═══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <div class="nav__logo-badge" aria-hidden="true">NTSL</div>
+          <div>
+            <div class="nav__logo-text">Namma Tejaswini</div>
+            <div class="nav__logo-sub" style="color:rgba(255,255,255,.35)">Solution LLP</div>
+          </div>
+        </a>
+        <p class="footer__desc">Incorporated 2022. Bangalore-based IT solutions company with 15+ years of leadership expertise and preferred OEM partnerships across GeM.</p>
+        <div class="footer__contact-chips">
+          <span class="footer__chip">📍 Banashankari 6th Stage, Bangalore — 560062</span>
+          <a href="http://www.tejaswinisolutions.in/" class="footer__chip" target="_blank" rel="noopener">🌐 www.tejaswinisolutions.in</a>
+        </div>
+      </div>
+      <nav class="footer__col" aria-label="Products footer links">
+        <h4>PRODUCTS</h4>
+        <a href="index.html#products">Datacenter &amp; Servers</a>
+        <a href="index.html#products">Power Products</a>
+        <a href="index.html#products">IT Infrastructure</a>
+        <a href="index.html#products">End Computing</a>
+        <a href="index.html#products">Consumables</a>
+      </nav>
+      <nav class="footer__col" aria-label="Services footer links">
+        <h4>SERVICES</h4>
+        <a href="index.html#services">Managed IT Services</a>
+        <a href="index.html#services">Cloud Computing</a>
+        <a href="index.html#services">Network Security</a>
+        <a href="index.html#services">AMC Services</a>
+        <a href="index.html#services">IT Consulting</a>
+      </nav>
+      <nav class="footer__col" aria-label="Contact footer links">
+        <h4>CONTACT</h4>
+        <a href="mailto:info@tejaswinisolutions.in">info@tejaswinisolutions.in</a>
+        <a href="mailto:yashoda@tejaswinisolutions.in">yashoda@tejaswinisolutions.in</a>
+        <a href="mailto:chandan@tejaswinisolutions.in">chandan@tejaswinisolutions.in</a>
+        <a href="tel:+917975818823">+91 79758 18823</a>
+        <a href="tel:+919448840505">+91 94488 40505</a>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Namma Tejaswini Solution LLP. All rights reserved.</span>
+      <div class="footer__badge">
+        <span class="footer__badge-dot" aria-hidden="true"></span>
+        <span>GeM Registered · MSME Certified · Bangalore, KA</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<div class="toast" id="formToast" role="alert" aria-live="polite">✅ Message sent! We'll get back to you within 24 hours.</div>
+
+
+
+<script src="js/script.js"></script>
+<script>
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-item__q');
+    q.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-item__q').setAttribute('aria-expanded','false'); });
+      if (!wasOpen) { item.classList.add('open'); q.setAttribute('aria-expanded','true'); }
+    });
+    q.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); q.click(); } });
+  });
+</script>
+</body>
+</html>

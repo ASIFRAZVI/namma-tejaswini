@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Namma Tejaswini Solution LLP — Complete IT solutions on GeM. Servers, storage, networking, power products & managed services in Bangalore." />
+  <title>NTSL — Namma Tejaswini Solution LLP | IT Solutions Bangalore</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Toast style (inline, minimal) -->
+  <style>
+    .toast {
+      position: fixed; bottom: 32px; right: 32px; z-index: 9999;
+      background: #fff; border: 1px solid rgba(10,15,46,.1);
+      border-left: 4px solid #2563EB;
+      border-radius: 12px; padding: 16px 24px;
+      box-shadow: 0 12px 40px rgba(10,15,46,.14);
+      font-size: 14px; font-weight: 500; color: #0A0F2E;
+      transform: translateY(80px); opacity: 0;
+      transition: all .35s cubic-bezier(.34,1.56,.64,1);
+      pointer-events: none;
+    }
+    .toast--show { transform: translateY(0); opacity: 1; }
+    .hero__scroll-hint {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      z-index: 2; opacity: .5; animation: scrollHint 2s infinite;
+    }
+    @keyframes scrollHint { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+    .hero__scroll-hint span { font-size: 11px; letter-spacing: 1.5px; color: var(--grey-600); font-weight: 600; }
+    .hero__scroll-hint svg { width: 20px; height: 20px; stroke: var(--grey-600); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="NTSL Home">
+      <div class="nav__logo-badge" aria-hidden="true">NTSL</div>
+      <div>
+        <div class="nav__logo-text">Namma Tejaswini</div>
+        <div class="nav__logo-sub">Solution LLP</div>
+      </div>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html"   class="nav__link">Home</a></li>
+      <li><a href="about.html"   class="nav__link">About</a></li>
+      <li><a href="index.html#products"  class="nav__link">Products</a></li>
+      <li><a href="index.html#services"  class="nav__link">Services</a></li>
+      <li><a href="index.html#clients"   class="nav__link">Clients</a></li>
+      <li><a href="contact.html" class="nav__link">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav__cta">Get in Touch →</a>
+    <button class="nav__burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="nav__mobile" id="navMobile" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html"          class="nav__link">Home</a>
+  <a href="about.html"          class="nav__link">About Us</a>
+  <a href="index.html#products" class="nav__link">Products</a>
+  <a href="index.html#services" class="nav__link">Services</a>
+  <a href="index.html#clients"  class="nav__link">Clients</a>
+  <a href="contact.html"        class="nav__link">Contact</a>
+  <a href="contact.html" class="btn btn-primary" style="margin-top:16px">Get in Touch →</a>
+</div>
+
+<!-- ═══════════════════════════ HERO ════════════════════════════ -->
+<main>
+<section class="hero" aria-label="Hero">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+  <div class="hero__content">
+    <div class="hero__badge" role="status">
+      <div class="hero__badge-dot" aria-hidden="true"></div>
+      <span>Bangalore's Trusted IT Partner · Est. 2022</span>
+    </div>
+
+    <h1 class="hero__h1 syne">
+      Technology<br/>
+      that <span class="text-blue">powers</span><br/>
+      <span class="text-gold">smarter</span> futures
+    </h1>
+
+    <p class="hero__sub">
+      Complete IT solutions on GeM — servers, storage, networking, power, and managed services — backed by 15&plus; years of expertise.
+    </p>
+
+    <div class="hero__actions">
+      <a href="index.html#products" class="btn btn-primary">Explore Solutions →</a>
+      <a href="contact.html" class="btn btn-secondary">📋 Request a Quote</a>
+    </div>
+
+    <div class="hero__gem">
+      <span>🏛️</span>
+      <span>GeM Government e-Marketplace · Verified Partner</span>
+    </div>
+  </div>
+
+  <!-- Floating Stat Cards -->
+  <div class="hero__stats" aria-label="Key figures">
+    <div class="stat-card reveal">
+      <div class="stat-card__num" data-count="15">
+        <span class="accent"><span class="count-val">15</span></span>+
+      </div>
+      <div class="stat-card__lbl">Years of Expertise</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-1">
+      <div class="stat-card__num" data-count="20">
+        <span class="accent"><span class="count-val">20</span></span>+
+      </div>
+      <div class="stat-card__lbl">Govt. Clients</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-2">
+      <div class="stat-card__num" data-count="12">
+        <span class="accent"><span class="count-val">12</span></span>+
+      </div>
+      <div class="stat-card__lbl">OEM Partners</div>
+    </div>
+  </div>
+
+  <div class="hero__scroll-hint" aria-hidden="true">
+    <span>SCROLL</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ TRUST BAR ════════════════════════ -->
+<div class="trust-bar" aria-label="Technology partners">
+  <div class="trust-bar__inner">
+    <span class="trust-bar__label">PARTNERS</span>
+    <div class="trust-bar__track">
+      <span class="trust-logo">HP</span>
+      <span class="trust-logo">HPE</span>
+      <span class="trust-logo">DELL</span>
+      <span class="trust-logo">LENOVO</span>
+      <span class="trust-logo">ACER</span>
+      <span class="trust-logo">EPSON</span>
+      <span class="trust-logo">KYOCERA</span>
+      <span class="trust-logo">CANON</span>
+      <span class="trust-logo">SAMSUNG</span>
+      <span class="trust-logo">LG</span>
+      <span class="trust-logo">APC</span>
+      <span class="trust-logo">XEROX</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ WHY NTSL ════════════════════════ -->
+<section class="section" id="why" aria-labelledby="why-heading">
+  <div class="container">
+    <div class="section-head-center reveal">
+      <span class="section-label">WHY CHOOSE US</span>
+      <h2 class="section-h2" id="why-heading">Built on trust,<br/>driven by precision</h2>
+      <p class="section-sub">Six pillars that set NTSL apart from every other IT vendor in the market.</p>
+    </div>
+
+    <div class="why-grid" role="list">
+      <div class="why-card reveal" role="listitem">
+        <div class="why-card__icon" aria-hidden="true">⚡</div>
+        <h3 class="why-card__title">Honest Efforts</h3>
+        <p class="why-card__desc">Transparency in every transaction — what you see is what you get, always aligned with your best interest.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1" role="listitem">
+        <div class="why-card__icon" aria-hidden="true">🎯</div>
+        <h3 class="why-card__title">Professional Approach</h3>
+        <p class="why-card__desc">Enterprise-grade processes and certified expertise ensuring every project exceeds expectations.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2" role="listitem">
+        <div class="why-card__icon" aria-hidden="true">🔄</div>
+        <h3 class="why-card__title">Consistent Delivery</h3>
+        <p class="why-card__desc">Reliable timelines and outcomes — your business never waits because of us.</p>
+      </div>
+      <div class="why-card reveal" role="listitem">
+        <div class="why-card__icon" aria-hidden="true">🏆</div>
+        <h3 class="why-card__title">High Quality Service</h3>
+        <p class="why-card__desc">OEM-authorized products with skilled support teams trained on every brand we carry.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1" role="listitem">
+        <div class="why-card__icon" aria-hidden="true">💎</div>
+        <h3 class="why-card__title">Competitive Pricing</h3>
+        <p class="why-card__desc">GeM-listed pricing ensures government-verified fair value on every product and service.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2" role="listitem">
+        <div class="why-card__icon" aria-hidden="true">⏱️</div>
+        <h3 class="why-card__title">Minimum TAT</h3>
+        <p class="why-card__desc">Optimized logistics and rapid deployment — minimum turn-around time, always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PRODUCTS ════════════════════════ -->
+<section class="section section--dark" id="products" aria-labelledby="products-heading">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px" class="reveal">
+      <div>
+        <span class="section-label section-label--gold">PRODUCTS</span>
+        <h2 class="section-h2 section-h2--white" id="products-heading">Full-spectrum<br/>IT portfolio</h2>
+      </div>
+      <p class="section-sub section-sub--white" style="max-width:380px">From datacenter build-outs to endpoint computing — every layer covered, every brand authorized.</p>
+    </div>
+
+    <div class="products-grid" role="list">
+      <article class="product-card reveal" role="listitem">
+        <div class="product-card__icon" aria-hidden="true">🖥️</div>
+        <div class="product-card__arrow" aria-hidden="true">→</div>
+        <h3 class="product-card__name">Datacenter &amp; Servers</h3>
+        <p class="product-card__desc">HPE, HP, Dell servers · storage arrays · networking racks · PDUs · structured cabling with copper &amp; OFC.</p>
+      </article>
+      <article class="product-card reveal reveal-delay-1" role="listitem">
+        <div class="product-card__icon" aria-hidden="true">⚡</div>
+        <div class="product-card__arrow" aria-hidden="true">→</div>
+        <h3 class="product-card__name">Power Products</h3>
+        <p class="product-card__desc">Small / medium / large Online UPS · APC battery systems · precision cooling solutions for critical infrastructure.</p>
+      </article>
+      <article class="product-card reveal reveal-delay-2" role="listitem">
+        <div class="product-card__icon" aria-hidden="true">🔒</div>
+        <div class="product-card__arrow" aria-hidden="true">→</div>
+        <h3 class="product-card__name">IT Infrastructure</h3>
+        <p class="product-card__desc">Firewalls · DLP · antivirus · networking racks · Microsoft licensing · biometric access · care packs.</p>
+      </article>
+      <article class="product-card reveal" role="listitem">
+        <div class="product-card__icon" aria-hidden="true">🖨️</div>
+        <div class="product-card__arrow" aria-hidden="true">→</div>
+        <h3 class="product-card__name">End Computing</h3>
+        <p class="product-card__desc">Desktops · laptops · workstations · tablets · projectors · photocopiers · large-format displays.</p>
+      </article>
+      <article class="product-card reveal reveal-delay-1" role="listitem">
+        <div class="product-card__icon" aria-hidden="true">🧩</div>
+        <div class="product-card__arrow" aria-hidden="true">→</div>
+        <h3 class="product-card__name">Consumables &amp; Accessories</h3>
+        <p class="product-card__desc">Printer consumables · replacement batteries · networking accessories · laptop accessories · privacy screens.</p>
+      </article>
+      <article class="product-card reveal reveal-delay-2" role="listitem">
+        <div class="product-card__icon" aria-hidden="true">☁️</div>
+        <div class="product-card__arrow" aria-hidden="true">→</div>
+        <h3 class="product-card__name">IT Solutions &amp; AMC</h3>
+        <p class="product-card__desc">Managed IT · VPN · cloud computing · remote infra management · system integration · multi-vendor support.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SERVICES ════════════════════════ -->
+<section class="section" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-head-center reveal">
+      <span class="section-label">IT SOLUTIONS</span>
+      <h2 class="section-h2" id="services-heading">Services that keep<br/>your business moving</h2>
+      <p class="section-sub">From strategic planning to boots-on-ground support — comprehensive managed services.</p>
+    </div>
+
+    <div class="partners-grid" style="margin-top:56px" role="list">
+      <div class="partner-card reveal" role="listitem">Managed IT Services</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">VPN Services</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">System Integration</div>
+      <div class="partner-card reveal" role="listitem">Infrastructure Consulting</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">Network Security &amp; Audit</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">Structured Cabling</div>
+      <div class="partner-card reveal" role="listitem">FMS Service</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">Remote Infra Mgmt</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">IT Equipment Rental</div>
+      <div class="partner-card reveal" role="listitem">Cloud Computing</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">Multi-Vendor Support</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">AMC Services</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CLIENTS ════════════════════════ -->
+<section class="section section--alt" id="clients" aria-labelledby="clients-heading">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:0" class="reveal">
+      <div>
+        <span class="section-label">CLIENTELE</span>
+        <h2 class="section-h2" id="clients-heading">Trusted by governments<br/>&amp; enterprises</h2>
+      </div>
+      <p class="section-sub" style="max-width:360px">Karnataka state departments, central government agencies, medical institutions, and private enterprises.</p>
+    </div>
+
+    <div class="clients-grid" role="list">
+      <div class="client-pill client-pill--gold reveal" role="listitem">
+        <span class="client-pill__dot"></span>NIMHANS
+      </div>
+      <div class="client-pill reveal reveal-delay-1" role="listitem">
+        <span class="client-pill__dot"></span>Karnataka Lokayuktha
+      </div>
+      <div class="client-pill client-pill--gold reveal reveal-delay-2" role="listitem">
+        <span class="client-pill__dot"></span>Dept. of Military Affairs — Indian Army
+      </div>
+      <div class="client-pill reveal" role="listitem">
+        <span class="client-pill__dot"></span>KITS — Karnataka Innovation &amp; Technology Society
+      </div>
+      <div class="client-pill reveal reveal-delay-1" role="listitem">
+        <span class="client-pill__dot"></span>Tumkur University — Education Dept.
+      </div>
+      <div class="client-pill client-pill--gold reveal reveal-delay-2" role="listitem">
+        <span class="client-pill__dot"></span>Public Works Dept. of Karnataka
+      </div>
+      <div class="client-pill reveal" role="listitem">
+        <span class="client-pill__dot"></span>Water Resource Dept. of Karnataka
+      </div>
+      <div class="client-pill reveal reveal-delay-1" role="listitem">
+        <span class="client-pill__dot"></span>Urban Development Dept. Karnataka
+      </div>
+      <div class="client-pill client-pill--gold reveal reveal-delay-2" role="listitem">
+        <span class="client-pill__dot"></span>Karnataka Govt. Insurance Dept.
+      </div>
+      <div class="client-pill reveal" role="listitem">
+        <span class="client-pill__dot"></span>Chikkamagaluru Institute of Medical Science
+      </div>
+      <div class="client-pill client-pill--gold reveal reveal-delay-1" role="listitem">
+        <span class="client-pill__dot"></span>Rajiv Gandhi Rural Housing Corp. (RGRHCL)
+      </div>
+      <div class="client-pill reveal reveal-delay-2" role="listitem">
+        <span class="client-pill__dot"></span>DHO Davangere &amp; DHO Madikeri
+      </div>
+      <div class="client-pill reveal" role="listitem">
+        <span class="client-pill__dot"></span>City Municipal Council, Hosapete
+      </div>
+      <div class="client-pill client-pill--gold reveal reveal-delay-1" role="listitem">
+        <span class="client-pill__dot"></span>Zilla Panchayat, Chithradurga
+      </div>
+      <div class="client-pill reveal reveal-delay-2" role="listitem">
+        <span class="client-pill__dot"></span>Mines &amp; Geology — Revenue Dept., Ramanagara
+      </div>
+      <div class="client-pill reveal" role="listitem">
+        <span class="client-pill__dot"></span>Recipharm Pharmaservice Pvt. Ltd.
+      </div>
+      <div class="client-pill reveal reveal-delay-1" role="listitem">
+        <span class="client-pill__dot"></span>Revenue Dept. Survey Settlement
+      </div>
+      <div class="client-pill reveal reveal-delay-2" role="listitem">
+        <span class="client-pill__dot"></span>Royal Dream To Fly Private Limited
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PARTNERS ════════════════════════ -->
+<section class="section" aria-labelledby="partners-heading">
+  <div class="container">
+    <div class="section-head-center reveal">
+      <span class="section-label">TECHNOLOGY PARTNERS</span>
+      <h2 class="section-h2" id="partners-heading">Authorized across<br/>all major OEMs</h2>
+      <p class="section-sub">We carry and support products from the world's leading technology manufacturers.</p>
+    </div>
+    <div class="partners-grid" role="list">
+      <div class="partner-card reveal" role="listitem">HPE</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">HP</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">DELL</div>
+      <div class="partner-card reveal" role="listitem">LENOVO</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">ACER</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">XEROX</div>
+      <div class="partner-card reveal" role="listitem">KYOCERA</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">EPSON</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">SAMSUNG</div>
+      <div class="partner-card reveal" role="listitem">CANON</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">LG</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">PANASONIC</div>
+      <div class="partner-card reveal" role="listitem">BROTHER</div>
+      <div class="partner-card reveal reveal-delay-1" role="listitem">APC</div>
+      <div class="partner-card reveal reveal-delay-2" role="listitem">TVS ELEC.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CTA ════════════════════════════ -->
+<section class="cta-section" aria-labelledby="cta-heading">
+  <div class="container">
+    <span class="section-label section-label--gold reveal">GET STARTED</span>
+    <h2 class="section-h2 section-h2--white reveal" id="cta-heading">
+      Ready to elevate your<br/>IT infrastructure?
+    </h2>
+    <p class="section-sub section-sub--white reveal reveal-delay-1">
+      Let NTSL architect the right technology foundation for your organization — on GeM or direct procurement.
+    </p>
+    <div class="cta-actions reveal reveal-delay-2">
+      <a href="contact.html" class="btn btn-white">Talk to Our Team →</a>
+      <a href="tel:+917975818823" class="btn btn-outline-white">📞 +91 79758 18823</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <div class="nav__logo-badge" aria-hidden="true">NTSL</div>
+          <div>
+            <div class="nav__logo-text">Namma Tejaswini</div>
+            <div class="nav__logo-sub" style="color:rgba(255,255,255,.35)">Solution LLP</div>
+          </div>
+        </a>
+        <p class="footer__desc">Incorporated 2022. Bangalore-based IT solutions company with 15+ years of leadership expertise and preferred OEM partnerships across GeM.</p>
+        <div class="footer__contact-chips">
+          <a href="https://goo.gl/maps/ntsl" class="footer__chip">
+            📍 Banashankari 6th Stage, Bangalore — 560062
+          </a>
+          <a href="http://www.tejaswinisolutions.in/" class="footer__chip" target="_blank" rel="noopener">
+            🌐 www.tejaswinisolutions.in
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer__col" aria-label="Products footer links">
+        <h4>PRODUCTS</h4>
+        <a href="index.html#products">Datacenter &amp; Servers</a>
+        <a href="index.html#products">Power Products</a>
+        <a href="index.html#products">IT Infrastructure</a>
+        <a href="index.html#products">End Computing</a>
+        <a href="index.html#products">Consumables</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Services footer links">
+        <h4>SERVICES</h4>
+        <a href="index.html#services">Managed IT Services</a>
+        <a href="index.html#services">Cloud Computing</a>
+        <a href="index.html#services">Network Security</a>
+        <a href="index.html#services">AMC Services</a>
+        <a href="index.html#services">IT Consulting</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Contact footer links">
+        <h4>CONTACT</h4>
+        <a href="mailto:info@tejaswinisolutions.in">info@tejaswinisolutions.in</a>
+        <a href="mailto:yashoda@tejaswinisolutions.in">yashoda@tejaswinisolutions.in</a>
+        <a href="mailto:chandan@tejaswinisolutions.in">chandan@tejaswinisolutions.in</a>
+        <a href="tel:+917975818823">+91 79758 18823</a>
+        <a href="tel:+919448840505">+91 94488 40505</a>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Namma Tejaswini Solution LLP. All rights reserved.</span>
+      <div class="footer__badge">
+        <span class="footer__badge-dot" aria-hidden="true"></span>
+        <span>GeM Registered · MSME Certified · Bangalore, KA</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="formToast" role="alert" aria-live="polite">✅ Message sent! We'll get back to you within 24 hours.</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
